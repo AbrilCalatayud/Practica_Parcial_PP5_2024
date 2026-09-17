@@ -9,3 +9,14 @@
 Se conoce la cantidad de horas que trabajó por día y cuál es su nivel (operativo, técnico o especialista). A todos los que tienen el mismo nivel, les pagan lo mismo.
 
 * **Se puede cambiar de tipo de relación de dependencia**. No debe afectar a la información previa de horas y días trabajados.
+
+## Decisiones tomadas:
+### Crear la clase Empleado. 
+Atributos: nombre, apellido, DNI, categoria y una colección de horas trabajadas por cada día (los elementos van a ser los totales de cada día, PERO SOLO DE ESTE MES).
+Métodos: sueldo(), precarizar(), efectivizar()
+
+## Crear la clase abstracta Categoria y sus clases hijas Contratado y DePlanta
+Ya que ambos son categorías y deben cumplir con el método que calcula el sueldo, hago una clase llamada Categoria de la que heredan las dos. De esta forma, puedo chequear que cuando se asigne una categoría, lo que se asigne sí sea una categoría.
+
+## Crear una clase contendora de Empleados: .
+Ya que como requerimiento se deben realizar métodos que trabajan con la información de todos los empleados.
