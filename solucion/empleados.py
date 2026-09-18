@@ -11,11 +11,11 @@ class Empleado:
     def sueldo(self):
         return self.categoria.calcular_sueldo(self.horas_trabajadas_este_mes)
 
-    def efectivizar(self, horas_minimas_dirias, costo_hora):
-        self.categoria = DePlanta(horas_minimas_dirias, costo_hora)
+    def efectivizar(self, nivel):
+        self.categoria = DePlanta(nivel)
 
-    def precarizar(self, nivel):
-        self.categoria = Contratado(nivel)
+    def precarizar(self, horas_minimas_dirias, costo_hora):
+        self.categoria = Contratado(horas_minimas_dirias, costo_hora)
 
 class Categoria(ABC):
 
