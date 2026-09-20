@@ -15,3 +15,7 @@ class Empresa:
 
     def total_sueldo_a_pagar(self):
         return sum(empleado.sueldo() for empleado in self.empleados)
+
+    def optimizar_sueldos(self, horas_minimas_diarias, costo_hora):
+        for empleado in self.empleados:
+            empleado.precarizar(horas_minimas_diarias, costo_hora)

@@ -7,6 +7,14 @@ class Categoria(ABC):
     def calcular_sueldo(self, horas_trabajadas_por_dia):
         pass
 
+    @abstractmethod
+    def pasar_a_planta(self, nivel):
+        pass
+
+    @abstractmethod
+    def pasar_a_contrato(self, horas_minimas_diarias, costo_hora):
+        pass
+
 class Contratado(Categoria):
     def __init__(self, horas_minimas_diarias, costo_hora):
         self.horas_minimas_diarias = horas_minimas_diarias
@@ -35,6 +43,12 @@ class Contratado(Categoria):
     def calcular_sueldo(self, horas_trabajadas_por_dia):
         return self.costo_hora * self.horas_minimas_diarias * sum(1 for x in horas_trabajadas_por_dia if x >= self.horas_minimas_diarias)
 
+    def pasar_a_planta(self, nivel):
+        return DePlanta(nivel)
+
+    def pasar_a_contrato(self, horas_minimas_diarias, costo_hora):
+        return self
+
 class Nivel(Enum):
     OPERARIO = 6000.00
     TECNICO = 8000.00
@@ -59,6 +73,12 @@ class DePlanta(Categoria):
         if total_horas_mes >= 200:
             return 200 * self.nivel.value + (total_horas_mes - 200) * 2 * self.nivel.value
         return 0
+
+    def pasar_a_planta(self, nivel):
+        return self
+
+    def pasar_a_contrato(self, horas_minimas_diarias, costo_hora):
+        return Contratado(horas_minimas_diarias, costo_hora)
 
 class Empleado:
     def __init__(self, nombre, apellido, dni, categoria):
@@ -113,10 +133,10 @@ class Empleado:
         return self.categoria.calcular_sueldo(self.horas_trabajadas_por_dia)
 
     def efectivizar(self, nivel):
-        self.categoria = DePlanta(nivel)
+        self.categoria = self.categoria.pasar_a_planta(nivel)
 
-    def precarizar(self, horas_minimas_dirias, costo_hora):
-        self.categoria = Contratado(horas_minimas_dirias, costo_hora)
+    def precarizar(self, horas_minimas_diarias, costo_hora):
+        self.categoria = self.categoria.pasar_a_contrato(horas_minimas_diarias, costo_hora)
 
     def registrar_horas_del_dia(self, horas):
         if not (0 <= horas <= 24):
