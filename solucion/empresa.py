@@ -23,7 +23,7 @@ class Empresa:
     def mejorar_sueldos(self, nivel):
         for empleado in self.empleados:
             empleado.efectivizar(nivel)
-            
+
     def mejor_sueldo(self):
         if not self.empleados:
             return 0
