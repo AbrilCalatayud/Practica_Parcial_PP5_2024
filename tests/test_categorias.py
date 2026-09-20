@@ -1,11 +1,3 @@
-''' Escenarios para los Tests
-● Incorporar nuevos empleados indicando sus datos personales y su categoría.
-● Calcular el sueldo de cada empleado según su categoría a fin de mes.
-● Obtener el total de sueldos que deben pagarse a fin de mes.
-● Obtener cuál es el empleado que recibe el mejor sueldo del mes.
-● Efectivizar empleados contratados, asignándoles un determinado nivel de planta.
-● Precarizar empleados de planta, asignándoles el contrato correspondiente. '''
-
 from solucion.empleados import Contratado, DePlanta, Nivel
 import pytest
 
