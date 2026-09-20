@@ -48,6 +48,6 @@ class Empleado:
         self.categoria = Contratado(horas_minimas_dirias, costo_hora)
 
     def registrar_horas_del_dia(self, horas):
-        if not (0 <= horas <= 25):
+        if not (0 <= horas <= 24):
             raise ValueError("No se pueden registrar horas negativas o mayores a 24")
         self.horas_trabajadas_por_dia.append(horas)
