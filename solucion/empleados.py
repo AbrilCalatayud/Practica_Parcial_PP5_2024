@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from enum import Enum
 
 class Empleado:
     def __init__(self, nombre, apellido, dni, categoria):
@@ -30,3 +31,18 @@ class Contratado(Categoria):
 
     def calcular_sueldo(self, horas_trabajadas_por_dia):
         return self.costo_hora * self.horas_minimas_diarias * sum(1 for x in horas_trabajadas_por_dia if x >= self.horas_minimas_diarias)
+
+class Nivel(Enum):
+    OPERARIO = 6000.00
+    TECNICO = 8000.00
+    ESPECIALISTA = 10000.00
+
+class DePlanta(Categoria):
+    def __init__(self, nivel):
+        self.nivel = nivel
+
+    def calcular_sueldo(self, horas_trabajadas_por_dia):
+        total_horas_mes = sum(horas_trabajadas_por_dia)
+        if total_horas_mes >= 200:
+            return 200 * self.nivel.value + (total_horas_mes - 200) * 2 * self.nivel.value
+        return 0
