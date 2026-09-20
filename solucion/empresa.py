@@ -20,7 +20,7 @@ class Empresa:
         for empleado in self.empleados:
             empleado.precarizar(horas_minimas_diarias, costo_hora)
 
-    def mejorar_sueldos(self, nivel):
+    def contratar_a_todos(self, nivel):
         for empleado in self.empleados:
             empleado.efectivizar(nivel)
 
