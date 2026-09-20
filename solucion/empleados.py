@@ -32,11 +32,52 @@ class DePlanta(Categoria):
 
 class Empleado:
     def __init__(self, nombre, apellido, dni, categoria):
+        if not isinstance(dni, int) or dni <= 0:
+            raise ValueError("El DNI del empleado debe ser un valor entero positivo")
+        
         self.nombre = nombre
         self.apellido = apellido
-        self.dni = dni
+        self._dni = dni
         self.categoria = categoria
-        self.horas_trabajadas_por_dia = []
+        self._horas_trabajadas_por_dia = []
+
+    @property
+    def nombre(self):
+        return self._nombre
+
+    @property
+    def apellido(self):
+        return self._apellido
+
+    @property
+    def dni(self):
+        return self._dni
+
+    @property
+    def categoria(self):
+        return self._categoria
+
+    @property
+    def horas_trabajadas_por_dia(self):
+        return tuple(self._horas_trabajadas_por_dia)
+    
+    @nombre.setter
+    def nombre(self, nuevo_nombre):
+        if not nuevo_nombre.strip():
+            raise ValueError("El nombre del empleado no puede estar vacío")
+        self._nombre = nuevo_nombre
+
+    @apellido.setter
+    def apellido(self, nuevo_apellido):
+        if not nuevo_apellido.strip():
+            raise ValueError("El apellido del empleado no puede estar vacío")
+        self._apellido = nuevo_apellido
+
+    @categoria.setter
+    def categoria(self, nueva_categoria):
+        if not isinstance(nueva_categoria, Categoria):
+            raise TypeError("La categoria ingresada no es valida")
+        self._categoria = nueva_categoria
 
     def sueldo(self):
         return self.categoria.calcular_sueldo(self.horas_trabajadas_por_dia)
@@ -50,4 +91,4 @@ class Empleado:
     def registrar_horas_del_dia(self, horas):
         if not (0 <= horas <= 24):
             raise ValueError("No se pueden registrar horas negativas o mayores a 24")
-        self.horas_trabajadas_por_dia.append(horas)
+        self._horas_trabajadas_por_dia.append(horas)
