@@ -30,7 +30,9 @@ Como todos los empleados de planta calculan de la misma manera su sueldo y lo ú
 ## Preguntas teóricas
 Responder las siguientes preguntas sin realizar ningún código:
 1. ¿Es necesario realizar cambios sobre la lógica inicial del método total_sueldos_a_pagar cuando se agreguen nuevos tipos de empleados? Justificar conceptualmente.
+
 Rta: No es necesario realizar ningún cambio. La lógica del cálculo de sueldos no está dentro de la clase Empresa, ni tampoco dentro de la clase Empleado, sino que está dentro de cada categoría. No se necesita saber qué tipo de categoría tiene un empleado ya que todas las categorías implementan un método que calcula el sueldo y que se llama de la misma manera (debido a que así lo pide la clase abstracta Categoria). Si se quiere agregar una nueva clase, solo se debe crear una clase hija de Categoría que implemente este método a su manera; de esta manera extendemos las funcionalidades, sin modificar la lógica de la Empresa.
 
 2. ¿Qué concepto del paradigma orientado a objetos se rompería al utilizar IF en el método optimizar_sueldos? Justificar conceptualmente.
-Si se utilizara IF en este método, estaríamos haciendo que la clase Empresa sepa demasiado de los detalles de los empleados, aumentando el acoplamiento. También, hace menos escalable el código, ya que tendriamos que considerar cómo puede cambiar este IF si agregamos una nueva categoría. Al poner dejar la decisión en manos de la categoría en sí, aprovechamos el polimorfismo y cada Empleado reacciona dependiendo de qué tenga en su atributo categoría, permitiendo que la categoría decida si quedarse igual o cambiar.
+
+Rta: Si se utilizara IF en este método, estaríamos haciendo que la clase Empresa sepa demasiado de los detalles de los empleados, aumentando el acoplamiento. También, hace menos escalable el código, ya que tendriamos que considerar cómo puede cambiar este IF si agregamos una nueva categoría. Al poner dejar la decisión en manos de la categoría en sí, aprovechamos el polimorfismo y cada Empleado reacciona dependiendo de qué tenga en su atributo categoría, permitiendo que la categoría decida si quedarse igual o cambiar.
