@@ -1,23 +1,6 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 
-class Empleado:
-    def __init__(self, nombre, apellido, dni, categoria):
-        self.nombre = nombre
-        self.apellido = apellido
-        self.dni = dni
-        self.categoria = categoria
-        self.horas_trabajadas_por_dia = []
-
-    def sueldo(self):
-        return self.categoria.calcular_sueldo(self.horas_trabajadas_por_dia)
-
-    def efectivizar(self, nivel):
-        self.categoria = DePlanta(nivel)
-
-    def precarizar(self, horas_minimas_dirias, costo_hora):
-        self.categoria = Contratado(horas_minimas_dirias, costo_hora)
-
 class Categoria(ABC):
 
     @abstractmethod
@@ -46,3 +29,20 @@ class DePlanta(Categoria):
         if total_horas_mes >= 200:
             return 200 * self.nivel.value + (total_horas_mes - 200) * 2 * self.nivel.value
         return 0
+
+class Empleado:
+    def __init__(self, nombre, apellido, dni, categoria):
+        self.nombre = nombre
+        self.apellido = apellido
+        self.dni = dni
+        self.categoria = categoria
+        self.horas_trabajadas_por_dia = []
+
+    def sueldo(self):
+        return self.categoria.calcular_sueldo(self.horas_trabajadas_por_dia)
+
+    def efectivizar(self, nivel):
+        self.categoria = DePlanta(nivel)
+
+    def precarizar(self, horas_minimas_dirias, costo_hora):
+        self.categoria = Contratado(horas_minimas_dirias, costo_hora)
