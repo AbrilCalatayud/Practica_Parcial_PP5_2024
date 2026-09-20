@@ -21,5 +21,5 @@ Ya que ambos son categorías y deben cumplir con el método que calcula el sueld
 ## Crear una clase contendora de Empleados.
 Ya que como requerimiento se deben realizar métodos que trabajan con la información de todos los empleados.
 
-## Utilizar Startegy para la relación de dependencia. 
+## Utilizar Strategy para la relación de dependencia. 
 En la relación de dependencia voy a usar el patrón Strategy, porque necesito que se pueda calcular el sueldo de un empleado en base a su categoría, pero sin tener un método que utilice un IF para saber qué tipo de cálculo debe hacer, esa elección la quiero desacoplar del empleado y dejar que la categoría en sí se encargue de qué algoritmo va a implementar. También, porque si fuera una herencia, si quisiera cambiar la categoría del empleado, debería crear un nuevo objeto que tenga los mismos datos personales y las horas que el empleado, pero con una categoría diferente. No voy a usar el patrón State, porque no cambia el tipo de categoría en base a un valor o puntaje, sino que cambia arbitrariemnte según lo que requiere el usuario del sistema (es decir, se puede precarizar o efectivizar arbitrariamente).
