@@ -19,3 +19,8 @@ class Empresa:
     def optimizar_sueldos(self, horas_minimas_diarias, costo_hora):
         for empleado in self.empleados:
             empleado.precarizar(horas_minimas_diarias, costo_hora)
+
+    def mejor_sueldo(self):
+        if not self.empleados:
+            return 0
+        return max(empleado.sueldo() for empleado in self.empleados)
