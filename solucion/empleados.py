@@ -12,6 +12,26 @@ class Contratado(Categoria):
         self.horas_minimas_diarias = horas_minimas_diarias
         self.costo_hora = costo_hora
 
+    @property
+    def horas_minimas_diarias(self):
+        return self._horas_minimas_diarias
+
+    @property
+    def costo_hora(self):
+        return self._costo_hora
+
+    @horas_minimas_diarias.setter
+    def horas_minimas_diarias(self, nueva_cant_minima):
+        if not 0 < nueva_cant_minima <= 24:
+            raise ValueError("Las cantidad de horas mínimas por día no puede ser negativa o mayor a 24")
+        self._horas_minimas_diarias = nueva_cant_minima
+
+    @costo_hora.setter
+    def costo_hora(self, nuevo_costo_hora):
+        if not nuevo_costo_hora > 0:
+            raise ValueError("El costo de las horas debe ser positivo")
+        self._costo_hora = nuevo_costo_hora
+
     def calcular_sueldo(self, horas_trabajadas_por_dia):
         return self.costo_hora * self.horas_minimas_diarias * sum(1 for x in horas_trabajadas_por_dia if x >= self.horas_minimas_diarias)
 
@@ -23,6 +43,16 @@ class Nivel(Enum):
 class DePlanta(Categoria):
     def __init__(self, nivel):
         self.nivel = nivel
+
+    @property
+    def nivel(self):
+        return self._nivel
+
+    @nivel.setter
+    def nivel(self, nuevo_nivel):
+        if not isinstance(nuevo_nivel, Nivel):
+            raise TypeError("El nivel ingresado no es valido")
+        self._nivel = nuevo_nivel
 
     def calcular_sueldo(self, horas_trabajadas_por_dia):
         total_horas_mes = sum(horas_trabajadas_por_dia)
